@@ -45,7 +45,7 @@ def main():
 
     df['aspect ratio'] = df['width'] / df['height']
 
-    df.to_csv('../../data/processed/df_train.csv')
+    df.to_csv('../../data/interim/df_train.csv')
 
     dfs = []
     total = 0
@@ -63,7 +63,7 @@ def main():
     test_df = pd.concat(dfs, axis=0, ignore_index=True)
     test_df.columns = ['image_path', 'label']
 
-    test_df.to_csv('../../data/processed/df_test.csv')
+    test_df.to_csv('../../data/interim/df_test.csv')
 
 
 def read_shape(row):

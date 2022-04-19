@@ -5,7 +5,7 @@ import pandas as pd
 test_full_set = np.load('../../data/processed/test_full_set.npy')
 test_full_labels = np.load('../../data/processed/test_full_labels.npy')
 
-test_df = pd.read_csv('../../data/processed/df_test.csv')
+test_df = pd.read_csv('../../data/interim/df_test.csv')
 
 model = tf.keras.models.load_model('../../models/MLP')
 

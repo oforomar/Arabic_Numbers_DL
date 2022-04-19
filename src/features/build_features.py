@@ -2,19 +2,26 @@ import numpy as np
 import pandas as pd
 import cv2
 
-train_df = pd.read_csv('../../data/processed/df_train.csv')
-test_df = pd.read_csv('../../data/processed/df_test.csv')
+train_df = pd.read_csv('../../data/interim/df_train.csv')
+test_df = pd.read_csv('../../data/interim/df_test.csv')
+
+train = []
+
+for i in range(1, 10):
+    train.append(train_df[train_df['label'] == i].sample(500, replace=True))
+    
+sampled = pd.concat(train, axis=0, ignore_index=True)
 
 
 NEW_IMAGE_WIDTH = 40//2
 NEW_IMAGE_HEIGHT = 108//2
-SIZE = len(train_df)
+SIZE = len(sampled)
 
 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,1))
-train_full_labels = train_df['label'].values
+train_full_labels = sampled['label'].values
 train_full_set = np.empty((SIZE, NEW_IMAGE_HEIGHT, NEW_IMAGE_WIDTH, 1), dtype=np.float32)
 
-for idx, path in enumerate(train_df['image_path']):
+for idx, path in enumerate(sampled['image_path']):
     img = cv2.imread(path, -1)
     img = cv2.resize(img, (NEW_IMAGE_WIDTH, NEW_IMAGE_HEIGHT), interpolation=cv2.INTER_NEAREST)
     

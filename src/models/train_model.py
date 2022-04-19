@@ -18,15 +18,15 @@ model = tf.keras.Sequential([
     
     tf.keras.layers.Flatten(input_shape=[108//2, 40//2]),
     tf.keras.layers.Rescaling(1./255),
-    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(512, activation='relu'),
     tf.keras.layers.BatchNormalization(),
     tf.keras.layers.Dropout(0.5),
-    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(256, activation='relu'),
     tf.keras.layers.BatchNormalization(),
     tf.keras.layers.Dropout(0.5),
-    #tf.keras.layers.Dense(64, activation='relu'),
-    #tf.keras.layers.BatchNormalization(),
-    #tf.keras.layers.Dropout(0.5),
+    tf.keras.layers.Dense(100, activation='relu'),
+    tf.keras.layers.BatchNormalization(),
+    tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Dense(10, activation='softmax')
 
 ])
